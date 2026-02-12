@@ -11,6 +11,17 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   title: "Kaboo Score Tracker",
   description: "Track scores for the card game Kaboo (Cabo)",
+  openGraph: {
+    title: "Kaboo Score Tracker",
+    description: "Track scores for the card game Kaboo (Cabo)",
+    siteName: "Kaboo",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kaboo Score Tracker",
+    description: "Track scores for the card game Kaboo (Cabo)",
+  },
 }
 
 export const viewport: Viewport = {
