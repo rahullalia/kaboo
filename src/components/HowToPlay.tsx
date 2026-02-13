@@ -34,17 +34,17 @@ export default function HowToPlay() {
           >
             <Card className="mt-3 space-y-4">
               <div>
-                <h4 className="text-xs font-semibold text-zinc-300 mb-1.5">Game Rules</h4>
+                <h4 className="text-xs font-semibold text-violet-400 mb-1.5">Game Rules</h4>
                 <ul className="space-y-1 text-xs text-zinc-400">
                   <li>Goal: End with the lowest score. First to 100 is eliminated.</li>
                   <li>Each turn: draw/swap cards, try to minimize your hand total.</li>
                   <li>Call &ldquo;Kaboo&rdquo; when you think you have the lowest total.</li>
                   <li>Correct Kaboo = 0 points. Wrong Kaboo = card total + 50 penalty.</li>
-                  <li>Special cards: 7 (peek own), 8 (peek opponent), 10 (blind swap).</li>
+                  <li>Special cards: <span className="text-amber-400 font-medium">7</span> (peek own), <span className="text-cyan-400 font-medium">8</span> (peek opponent), <span className="text-pink-400 font-medium">10</span> (blind swap).</li>
                 </ul>
               </div>
               <div>
-                <h4 className="text-xs font-semibold text-zinc-300 mb-1.5">Using the App</h4>
+                <h4 className="text-xs font-semibold text-pink-400 mb-1.5">Using the App</h4>
                 <ul className="space-y-1 text-xs text-zinc-400">
                   <li>Add 3–10 players and start a game.</li>
                   <li>Each round: tap who called Kaboo, mark correct/wrong, enter card totals.</li>

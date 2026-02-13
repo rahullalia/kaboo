@@ -100,7 +100,7 @@ export default function GamePage({
       <main className="flex-1 p-4 space-y-4">
         {isOver && <GameOverBanner game={game} />}
 
-        <Scoreboard standings={standings} roundCount={game.rounds.length} />
+        <Scoreboard standings={standings} roundCount={game.rounds.length} players={game.players} />
 
         {!isOver && (
           <Link href={`/game/${game.id}/round`}>

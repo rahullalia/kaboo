@@ -4,15 +4,16 @@ import { motion } from "framer-motion"
 import { Crown, Zap } from "lucide-react"
 import Badge from "@/components/ui/Badge"
 import Card from "@/components/ui/Card"
-import { PlayerStanding } from "@/lib/types"
-import { cn } from "@/lib/utils"
+import { Player, PlayerStanding } from "@/lib/types"
+import { cn, getPlayerColor } from "@/lib/utils"
 
 interface ScoreboardProps {
   standings: PlayerStanding[]
   roundCount: number
+  players: Player[]
 }
 
-export default function Scoreboard({ standings, roundCount }: ScoreboardProps) {
+export default function Scoreboard({ standings, roundCount, players }: ScoreboardProps) {
   const maxScore = Math.max(...standings.map((s) => s.totalScore))
   const lastPlaceCount = standings.filter((s) => s.totalScore === maxScore).length
 
@@ -46,20 +47,26 @@ export default function Scoreboard({ standings, roundCount }: ScoreboardProps) {
             )}
           >
             <div className="flex items-center gap-3">
-              <span
-                className={cn(
-                  "w-7 h-7 flex items-center justify-center rounded-full text-sm font-bold",
-                  s.rank === 1 && roundCount > 0
-                    ? "bg-white/10 text-white"
-                    : "bg-zinc-700/50 text-zinc-400"
-                )}
-              >
-                {s.rank === 1 && roundCount > 0 ? (
-                  <Crown className="w-3.5 h-3.5" />
-                ) : (
-                  s.rank
-                )}
-              </span>
+              {(() => {
+                const playerIndex = players.findIndex((p) => p.id === s.player.id)
+                const color = getPlayerColor(playerIndex)
+                return (
+                  <span
+                    className={cn(
+                      "w-7 h-7 flex items-center justify-center rounded-full text-sm font-bold",
+                      s.rank === 1 && roundCount > 0
+                        ? `${color.bg} text-white`
+                        : `${color.pill}`
+                    )}
+                  >
+                    {s.rank === 1 && roundCount > 0 ? (
+                      <Crown className="w-3.5 h-3.5" />
+                    ) : (
+                      s.rank
+                    )}
+                  </span>
+                )
+              })()}
               <div>
                 <span className="font-medium text-zinc-100">
                   {s.player.name}

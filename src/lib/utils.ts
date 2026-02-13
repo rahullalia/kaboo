@@ -8,3 +8,9 @@ export function cn(...inputs: ClassValue[]) {
 export function generateId(): string {
   return Math.random().toString(36).substring(2, 9) + Date.now().toString(36)
 }
+
+import { PLAYER_COLORS } from "@/lib/constants"
+
+export function getPlayerColor(index: number) {
+  return PLAYER_COLORS[index % PLAYER_COLORS.length]
+}

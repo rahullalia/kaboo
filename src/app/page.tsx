@@ -80,7 +80,7 @@ export default function HomePage() {
             </h2>
           ) : (
             <div className="text-center py-4">
-              <h2 className="text-2xl font-bold text-zinc-100">Kaboo</h2>
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-violet-400 via-pink-400 to-amber-400 bg-clip-text text-transparent">Kaboo</h2>
               <p className="text-sm text-zinc-500 mt-1">
                 Score tracker for the card game
               </p>

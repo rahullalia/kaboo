@@ -10,7 +10,7 @@ import Input from "@/components/ui/Input"
 import Card from "@/components/ui/Card"
 import { Game, Player } from "@/lib/types"
 import { MIN_PLAYERS, MAX_PLAYERS } from "@/lib/constants"
-import { generateId } from "@/lib/utils"
+import { generateId, getPlayerColor, cn } from "@/lib/utils"
 import { saveGame } from "@/lib/storage"
 
 export default function PlayerSetup() {
@@ -76,8 +76,8 @@ export default function PlayerSetup() {
               exit={{ opacity: 0, height: 0 }}
               className="flex items-center gap-2"
             >
-              <span className="w-6 text-sm text-zinc-500 text-right shrink-0">
-                {i + 1}.
+              <span className={cn("w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold text-white shrink-0", getPlayerColor(i).bg)}>
+                {i + 1}
               </span>
               <Input
                 placeholder={`Player ${i + 1}`}

@@ -12,7 +12,7 @@ import Badge from "@/components/ui/Badge"
 import CardPowers from "@/components/CardPowers"
 import { Game, Round } from "@/lib/types"
 import { buildRoundScore, computeFinalScore } from "@/lib/gameLogic"
-import { generateId, cn } from "@/lib/utils"
+import { generateId, cn, getPlayerColor } from "@/lib/utils"
 
 interface RoundEntryFormProps {
   game: Game
@@ -151,20 +151,23 @@ export default function RoundEntryForm({ game, onSave, editRound }: RoundEntryFo
           </h3>
         </div>
         <div className="flex flex-wrap gap-2">
-          {game.players.map((p) => (
-            <button
-              key={p.id}
-              onClick={() => toggleKabooCaller(p.id)}
-              className={cn(
-                "px-3 py-1.5 rounded-full text-sm font-medium transition-all",
-                kabooCaller === p.id
-                  ? "bg-cyan-500 text-white"
-                  : "bg-zinc-700/50 text-zinc-400 hover:bg-zinc-700"
-              )}
-            >
-              {p.name}
-            </button>
-          ))}
+          {game.players.map((p, i) => {
+            const color = getPlayerColor(i)
+            return (
+              <button
+                key={p.id}
+                onClick={() => toggleKabooCaller(p.id)}
+                className={cn(
+                  "px-3 py-1.5 rounded-full text-sm font-medium transition-all",
+                  kabooCaller === p.id
+                    ? `${color.bg} text-white`
+                    : `${color.pill} hover:opacity-80`
+                )}
+              >
+                {p.name}
+              </button>
+            )
+          })}
         </div>
 
         {/* Correct / Wrong toggle */}

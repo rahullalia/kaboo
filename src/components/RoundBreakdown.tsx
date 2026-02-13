@@ -5,7 +5,7 @@ import { Zap, AlertTriangle, Pencil, Trash2 } from "lucide-react"
 import Badge from "@/components/ui/Badge"
 import Card from "@/components/ui/Card"
 import { Game } from "@/lib/types"
-import { cn } from "@/lib/utils"
+import { cn, getPlayerColor } from "@/lib/utils"
 
 interface RoundBreakdownProps {
   game: Game
@@ -49,16 +49,18 @@ export default function RoundBreakdown({ game, gameId, onDeleteRound }: RoundBre
           </div>
           <div className="divide-y divide-zinc-700/20">
             {round.scores.map((score) => {
-              const player = game.players.find(
+              const playerIndex = game.players.findIndex(
                 (p) => p.id === score.playerId
               )
+              const player = game.players[playerIndex]
+              const color = getPlayerColor(playerIndex)
               return (
                 <div
                   key={score.playerId}
                   className="flex items-center justify-between px-4 py-2"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-zinc-300">
+                    <span className={cn("text-sm font-medium", color.text)}>
                       {player?.name}
                     </span>
                     {score.calledKaboo && score.kabooCorrect && (

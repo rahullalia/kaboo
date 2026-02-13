@@ -23,7 +23,10 @@ export default function GameOverBanner({ game }: GameOverBannerProps) {
       transition={{ type: "spring", duration: 0.5 }}
     >
       <Card className="text-center space-y-4 border-red-500/30 bg-red-500/5">
-        <div className="text-3xl font-bold bg-gradient-to-r from-zinc-100 to-zinc-400 bg-clip-text text-transparent">
+        <div
+          className="text-3xl font-bold bg-clip-text text-transparent"
+          style={{ backgroundImage: "linear-gradient(to right, #a78bfa, #f472b6, #fbbf24, #34d399, #22d3ee)" }}
+        >
           Game Over!
         </div>
 
