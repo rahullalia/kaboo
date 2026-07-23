@@ -2,7 +2,11 @@
 
 ## What This Is
 
-Score tracker PWA for the Kaboo card game. Mobile-first, built for game nights. Next.js 16.1.6 (App Router, Turbopack) + TypeScript + Tailwind CSS v4 + Framer Motion. Repo: https://github.com/rahullalia/kaboo. Vercel auto-deploys on push to `main`.
+Score tracker PWA for the Kaboo card game. Mobile-first, built for game nights. Next.js 16.1.6 (App Router, Turbopack) + TypeScript + Tailwind CSS v4 + Framer Motion.
+
+- Live: https://kaboo.rsla.io (verified 2026-07-22)
+- Repo: https://github.com/rahullalia/kaboo
+- Vercel project `kaboo`, auto-deploys on push to `main`
 
 ## Rules
 
