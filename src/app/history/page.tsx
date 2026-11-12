@@ -1,18 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Header from "@/components/Header"
 import GameHistoryList from "@/components/GameHistoryList"
-import { Game } from "@/lib/types"
-import { getGames } from "@/lib/storage"
+import { useSavedGames } from "@/hooks/useGame"
 
 export default function HistoryPage() {
-  const [completedGames, setCompletedGames] = useState<Game[]>([])
-
-  useEffect(() => {
-    const games = getGames().filter((g) => g.status === "completed")
-    setCompletedGames(games)
-  }, [])
+  const completedGames = (useSavedGames() ?? []).filter((g) => g.status === "completed")
 
   return (
     <>

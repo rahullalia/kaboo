@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Link from "next/link"
 import { History, Gamepad2 } from "lucide-react"
 import Header from "@/components/Header"
@@ -9,18 +8,13 @@ import HowToPlay from "@/components/HowToPlay"
 import Button from "@/components/ui/Button"
 import Card from "@/components/ui/Card"
 import { Game } from "@/lib/types"
-import { getGames } from "@/lib/storage"
+import { useSavedGames } from "@/hooks/useGame"
 import { getStandings } from "@/lib/gameLogic"
 
 export default function HomePage() {
-  const [activeGames, setActiveGames] = useState<Game[]>([])
-  const [hasHistory, setHasHistory] = useState(false)
-
-  useEffect(() => {
-    const games = getGames()
-    setActiveGames(games.filter((g) => g.status === "active"))
-    setHasHistory(games.some((g) => g.status === "completed"))
-  }, [])
+  const games = useSavedGames() ?? []
+  const activeGames = games.filter((g) => g.status === "active")
+  const hasHistory = games.some((g) => g.status === "completed")
 
   const getLeaderInfo = (game: Game): string => {
     if (game.rounds.length === 0) return "No rounds yet"

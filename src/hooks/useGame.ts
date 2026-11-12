@@ -1,19 +1,22 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useCallback, useSyncExternalStore } from "react"
 import { Game, Round } from "@/lib/types"
-import { getGame, saveGame } from "@/lib/storage"
+import { getGamesSnapshot, saveGame, subscribeGames } from "@/lib/storage"
 import { checkGameOver } from "@/lib/gameLogic"
 
-export function useGame(gameId: string) {
-  const [game, setGame] = useState<Game | null>(null)
-  const [loading, setLoading] = useState(true)
+const noSubscription = () => () => {}
+const notLoaded = () => null
 
-  useEffect(() => {
-    const g = getGame(gameId)
-    setGame(g)
-    setLoading(false)
-  }, [gameId])
+// The saved games, read as the screen renders; null on the server and until hydration.
+export function useSavedGames(): Game[] | null {
+  return useSyncExternalStore<Game[] | null>(noSubscription, getGamesSnapshot, notLoaded)
+}
+
+export function useGame(gameId: string) {
+  const games = useSyncExternalStore<Game[] | null>(subscribeGames, getGamesSnapshot, notLoaded)
+  const loading = games === null
+  const game = games?.find((g) => g.id === gameId) ?? null
 
   const addRound = useCallback(
     (round: Round) => {
@@ -33,7 +36,6 @@ export function useGame(gameId: string) {
       }
 
       saveGame(updated)
-      setGame(updated)
     },
     [game]
   )
@@ -51,7 +53,6 @@ export function useGame(gameId: string) {
     }
 
     saveGame(updated)
-    setGame(updated)
   }, [game])
 
   const updateRound = useCallback(
@@ -76,7 +77,6 @@ export function useGame(gameId: string) {
       }
 
       saveGame(updated)
-      setGame(updated)
     },
     [game]
   )
@@ -107,7 +107,6 @@ export function useGame(gameId: string) {
       }
 
       saveGame(updated)
-      setGame(updated)
     },
     [game]
   )
@@ -126,7 +125,6 @@ export function useGame(gameId: string) {
     }
 
     saveGame(updated)
-    setGame(updated)
   }, [game])
 
   return { game, loading, addRound, undoLastRound, updateRound, deleteRound, restartGame }
